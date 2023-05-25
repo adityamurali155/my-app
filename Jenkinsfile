@@ -1,5 +1,6 @@
 pipeline {
     def app
+    agent any
     stages {
         stage ('Clone the repository'){
             steps{
