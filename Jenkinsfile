@@ -12,6 +12,6 @@ node {
         }
     }
     stage ('Trigger ManifestUpdate') {
-        build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+        build job: 'updatemanifest', propagate: false, parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     }
 }
