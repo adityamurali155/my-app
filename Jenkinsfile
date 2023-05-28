@@ -14,4 +14,7 @@ node {
     stage ('Trigger ManifestUpdate') {
         build job: 'updatemanifest', propagate: false, parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     }
+    stage('Kubescape scan'){
+         build job: 'kubescan'
+    }
 }
