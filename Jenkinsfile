@@ -15,6 +15,8 @@ node {
         build job: 'updatemanifest', propagate: false, parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     }
     stage('Kubescape scan') {
+        sh 'curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash'
+        sh 'export export PATH=$PATH:/home/${USER}/.kubescape/bin'
         sh 'kubescape scan --format junit --output results.xml *.yaml'
     }
 }
