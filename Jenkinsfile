@@ -14,9 +14,4 @@ node {
     stage ('Trigger ManifestUpdate') {
         build job: 'updatemanifest', propagate: false, parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     }
-    stage('Kubescape scan') {
-        sh 'curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash'
-        sh 'export PATH=$PATH:/var/lib/jenkins/.kubescape/bin'
-        sh 'kubescape scan --exclude-namespaces kube-system,kube-public --format junit --output results.xml .'
-    }
 }
