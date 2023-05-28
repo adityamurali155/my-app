@@ -16,7 +16,7 @@ node {
     }
     stage('Kubescape scan') {
         sh 'curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash'
-        sh 'export export PATH=$PATH:/home/${USER}/.kubescape/bin'
+        sh 'export export PATH=$PATH:/var/lib/jenkins/.kubescape/bin'
         sh 'kubescape scan --format junit --output results.xml *.yaml'
     }
 }
