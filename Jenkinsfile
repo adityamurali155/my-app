@@ -17,6 +17,6 @@ node {
     stage('Kubescape scan') {
         sh 'curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash'
         sh 'export export PATH=$PATH:/var/lib/jenkins/.kubescape/bin'
-        sh 'kubescape scan framework nsa --exclude-namespaces kube-system,kube-public'
+        sh 'kubescape scan --exclude-namespaces kube-system,kube-public --format junit --output results.xml .'
     }
 }
