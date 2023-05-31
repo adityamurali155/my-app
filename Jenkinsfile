@@ -14,13 +14,11 @@ node {
     stage ('Trigger ManifestUpdate'){
         build job: 'updatemanifest', propagate: false, parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     }
-    stage ('Kubescape scan'){
-        agent {label 'KUBERNETES'}{
-            steps{
+    node ('KUBERNTES'){
+        stage ('Kubescape scan'){
                 sh 'helm repo add kubescape https://kubescape.github.io/helm-charts/'
                 sh 'helm repo update'
                 sh 'helm upgrade --install kubescape kubescape/kubescape-cloud-operator -n kubescape --create-namespace --set account=771d0eff-0171-44c3-831a-c68d7d9b108a --set clusterName=`kubectl config current-context`'
-            }
         }
     }
 }
