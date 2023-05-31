@@ -19,6 +19,8 @@ node {
             sh 'helm repo add kubescape https://kubescape.github.io/helm-charts/'
             sh 'helm repo update'
             sh 'helm upgrade --install kubescape kubescape/kubescape-cloud-operator -n kubescape --create-namespace --set account=771d0eff-0171-44c3-831a-c68d7d9b108a --set clusterName=`kubectl config current-context`'
+            sh 'which kubescape'
+            sh '$BIN_DIR/kubescape scan --exclude-namespaces kube-system,kube-public --format pdf --output results.pdf .'
         }
     }
 }
