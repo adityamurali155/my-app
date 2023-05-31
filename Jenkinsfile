@@ -14,7 +14,7 @@ node {
     stage ('Trigger ManifestUpdate'){
         build job: 'updatemanifest', propagate: false, parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
     }
-    node ('KUBERNTES'){
+    node ('KUBERNETES'){
         stage ('Kubescape scan'){
                 sh 'helm repo add kubescape https://kubescape.github.io/helm-charts/'
                 sh 'helm repo update'
